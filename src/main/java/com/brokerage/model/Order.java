@@ -33,8 +33,15 @@ public class Order {
     @Column(name = "order_side")
     private Side orderSide;
 
+    @Column(name = "size")
     private String size;
+
+    @Column(name = "price")
     private double price;
+
+    @Column(name = "status")
     private Status status;
+
+    @Column(name = "createDate")
     private LocalDateTime createDate;
 }

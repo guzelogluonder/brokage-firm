@@ -2,7 +2,6 @@ package com.brokerage.dto;
 
 import com.brokerage.enums.Side;
 import com.brokerage.enums.Status;
-import jakarta.persistence.Column;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
