@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Builder
@@ -16,8 +17,8 @@ public class AssetDto {
     private UUID id;
     private UUID customerId;
     private String assetName;
-    private int size;
-    private int usableSize;
+    private BigDecimal size;
+    private BigDecimal usableSize;
 
 
 }

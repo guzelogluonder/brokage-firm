@@ -9,6 +9,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.UUID;
 
@@ -16,7 +17,7 @@ import java.util.UUID;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Entity(name = "order")
+@Entity(name = "orders")
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
@@ -34,14 +35,14 @@ public class Order {
     private Side orderSide;
 
     @Column(name = "size")
-    private String size;
+    private int size;
 
     @Column(name = "price")
-    private double price;
+    private BigDecimal price;
 
     @Column(name = "status")
     private Status status;
 
-    @Column(name = "createDate")
+    @Column(name = "create_date")
     private LocalDateTime createDate;
 }
