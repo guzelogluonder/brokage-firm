@@ -7,6 +7,7 @@ import com.brokerage.service.OrderService;
 import lombok.AllArgsConstructor;
 
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,7 +28,7 @@ public class OrderController {
     @PostMapping(API_ORDERS)
     public ResponseEntity<OrderDto> createOrder(@RequestBody OrderDto orderDto){
 
-        return ResponseEntity.ok().body( orderService.createNewOrder(orderDto));
+        return new ResponseEntity<>(orderService.createNewOrder(orderDto), HttpStatus.CREATED);
 
     }
 
@@ -39,7 +40,8 @@ public class OrderController {
     }
 
     @DeleteMapping(DELETE_ORDER_PATH)
-    public void deleteOrder(@PathVariable("orderId") UUID orderId){
+    public Boolean deleteOrder(@PathVariable("orderId") UUID orderId){
         orderService.deleteOrder(Status.CANCELED,orderId);
+        return true;
     }
 }

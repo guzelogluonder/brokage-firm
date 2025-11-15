@@ -1,6 +1,5 @@
 package com.brokerage.service;
 
-import com.brokerage.dto.AssetDto;
 import com.brokerage.dto.OrderDto;
 import com.brokerage.enums.Side;
 import com.brokerage.enums.Status;
@@ -20,7 +19,6 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -66,8 +64,6 @@ public class OrderService {
     }
 
     public void deleteOrder(Status status, UUID orderId) {
-//        .info("Deleting order with ID: {}", orderId);
-
         Order order = orderRepository.findById(orderId)
                 .orElseThrow(() -> new ResourceNotFoundException("Order not found with ID: " + orderId));
 
@@ -75,17 +71,15 @@ public class OrderService {
             throw new InvalidOrderStatusException("Only PENDING orders can be deleted. Current status: " + order.getStatus());
         }
 
-        // Release locked assets
         if (order.getOrderSide() == Side.BUY) {
             releaseBuyOrderAssets(order);
         } else {
             releaseSellOrderAssets(order);
         }
 
-        // Update order status to CANCELED
         order.setStatus(Status.CANCELED);
         orderRepository.save(order);
-
+        orderMapper.orderToDto(order);
     }
 
 
@@ -94,6 +88,10 @@ public class OrderService {
                 .orElseThrow(() -> new ResourceNotFoundException("Asset " + order.getAssetName() + " not found for customer: " + order.getCustomerId()));
 
         BigDecimal totalPrice = order.getSize().multiply(order.getPrice());
+
+        if (asset.getUsableSize().compareTo(totalPrice) < 0) {
+            throw new InsufficientBalanceException("Insufficient TRY balance. Required: " + order.getSize() + ", Available: " + asset.getUsableSize());
+        }
 
         asset.setUsableSize(asset.getUsableSize().subtract(totalPrice));
         assetRepository.save(asset);
