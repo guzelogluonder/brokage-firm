@@ -32,7 +32,9 @@ public class OrderController {
     }
 
     @GetMapping(API_ORDERS)
-    public List<Order> listOrders (@RequestParam Long customerId, @RequestParam(required = false) LocalDateTime startDate, @RequestParam(required = false) LocalDateTime endDate){
+    public List<Order> listOrders (@RequestParam Long customerId,
+                                   @RequestParam(required = false) LocalDateTime startDate,
+                                   @RequestParam(required = false) LocalDateTime endDate){
         return ResponseEntity.ok().body(orderService.listOrders(customerId,startDate,endDate)).getBody();
     }
 

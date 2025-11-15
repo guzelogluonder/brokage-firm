@@ -20,3 +20,11 @@ CREATE TABLE orders
     status      VARCHAR(20),
     create_date TIMESTAMP
 );
+CREATE TABLE customer
+(
+    customer_id VARCHAR(36),
+    username   VARCHAR(255),
+    password    VARCHAR(255),
+    role        VARCHAR(255)
+
+);
