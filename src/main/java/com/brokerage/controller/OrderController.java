@@ -10,6 +10,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
@@ -20,26 +21,23 @@ public class OrderController {
 
     private final OrderService orderService;
 
-    public static final String ORDER_CREATE_PATH = "/orders/{customerId}";
-    public static final String DELETE_ORDER_CREATE_PATH = "/orders/{customerId}/{orderId}";
+    public static final String API_ORDERS = "/api/orders";
+    public static final String DELETE_ORDER_PATH = "/api/orders/{orderId}";
 
-    @PostMapping(ORDER_CREATE_PATH)
-    public ResponseEntity<OrderDto> createOrder(@PathVariable("customerId") UUID customerId, @RequestBody OrderDto orderDto){
-
-        orderDto.setCustomerId(customerId);
+    @PostMapping(API_ORDERS)
+    public ResponseEntity<OrderDto> createOrder(@RequestBody OrderDto orderDto){
 
         return ResponseEntity.ok().body( orderService.createNewOrder(orderDto));
 
     }
 
-    @GetMapping(ORDER_CREATE_PATH)
-    public List<Order> getOrder(@PathVariable("customerId") UUID customerId){
-        return ResponseEntity.ok().body(orderService.getOrder(customerId)).getBody();
+    @GetMapping(API_ORDERS)
+    public List<Order> listOrders (@RequestParam Long customerId, @RequestParam(required = false) LocalDateTime startDate, @RequestParam(required = false) LocalDateTime endDate){
+        return ResponseEntity.ok().body(orderService.listOrders(customerId,startDate,endDate)).getBody();
     }
 
-    @DeleteMapping(DELETE_ORDER_CREATE_PATH)
-    public void deleteOrder(@PathVariable("customerId") UUID customerId, @PathVariable("orderId") UUID orderId){
-        orderService.deleteOrder(Status.CANCELED,customerId,orderId);
+    @DeleteMapping(DELETE_ORDER_PATH)
+    public void deleteOrder(@PathVariable("orderId") UUID orderId){
+        orderService.deleteOrder(Status.CANCELED,orderId);
     }
-
 }

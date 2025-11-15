@@ -17,8 +17,8 @@ import java.util.UUID;
 @AllArgsConstructor
 public class OrderDto {
 
-    private UUID id;
-    private UUID customerId;
+    private UUID orderId;
+    private Long customerId;
     private String assetName;
     private Side orderSide;
     private BigDecimal size;

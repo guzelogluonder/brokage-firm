@@ -7,6 +7,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.UuidGenerator;
 
+import java.math.BigDecimal;
 import java.util.UUID;
 
 @Data
@@ -23,15 +24,15 @@ public class Asset {
     private UUID id;
 
     @Column(name = "customer_id")
-    private UUID customerId;
+    private Long customerId;
 
     @Column(name = "asset_name")
     private String assetName;
 
     @Column(name = "size")
-    private int size;
+    private BigDecimal size;
 
     @Column(name = "usable_size")
-    private int usableSize;
+    private BigDecimal usableSize;
 
 }

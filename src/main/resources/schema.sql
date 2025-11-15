@@ -11,7 +11,7 @@ CREATE TABLE assets
 -- Orders Table
 CREATE TABLE orders
 (
-    id          VARCHAR(36) PRIMARY KEY,
+    order_id    VARCHAR(36) PRIMARY KEY,
     customer_id VARCHAR(36),
     asset_name  VARCHAR(255),
     order_side  VARCHAR(10),

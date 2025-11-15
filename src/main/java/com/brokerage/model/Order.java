@@ -22,11 +22,11 @@ public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     @UuidGenerator
-    @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
-    private UUID id;
+    @Column(name ="order_id",length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
+    private UUID orderId;
 
     @Column(name = "customer_id")
-    private UUID customerId;
+    private Long customerId;
 
     @Column(name = "asset_name")
     private String assetName;
@@ -35,7 +35,7 @@ public class Order {
     private Side orderSide;
 
     @Column(name = "size")
-    private int size;
+    private BigDecimal size;
 
     @Column(name = "price")
     private BigDecimal price;

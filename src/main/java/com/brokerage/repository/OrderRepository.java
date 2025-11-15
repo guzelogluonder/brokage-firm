@@ -15,12 +15,14 @@ import java.util.UUID;
 
 public interface OrderRepository extends JpaRepository<Order, UUID> {
 
-    @Query("SELECT o FROM orders o WHERE o.customerId = :customerId AND o.createDate BETWEEN :startDate AND :endDate")
-    List<OrderDto> findAllById(UUID customerId, LocalDateTime startDate, LocalDateTime endDate);
+    @Query("SELECT o FROM orders o WHERE o.customerId = :customerId " +
+            "AND o.createDate >= :startDate AND o.createDate <= :endDate")
+    List<Order> findOrdersByCustomerAndDateRange(
+            @Param("customerId") Long customerId,
+            @Param("startDate") LocalDateTime startDate,
+            @Param("endDate") LocalDateTime endDate);
 
-    @Modifying
-    @Transactional
-    @Query("UPDATE orders o SET o.status = :status WHERE o.customerId = :customerId AND o.id = :id AND o.status = com.brokerage.enums.Status.PENDING")
-    void deleteById(@Param("status")Status status, @Param("customerId")UUID customerId, @Param("id")UUID id);
+    List<Order> findByCustomerId(Long customerId);
+
 
 }

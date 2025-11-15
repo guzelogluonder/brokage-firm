@@ -15,7 +15,7 @@ import java.util.UUID;
 public class AssetDto {
 
     private UUID id;
-    private UUID customerId;
+    private Long customerId;
     private String assetName;
     private BigDecimal size;
     private BigDecimal usableSize;
