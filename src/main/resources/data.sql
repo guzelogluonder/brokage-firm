@@ -1,6 +1,6 @@
 INSERT INTO assets (id, customer_id, asset_name, size, usable_size)
-VALUES (RANDOM_UUID(), '1', 'TRY', 100.000, 100.000),
-       (RANDOM_UUID(), '1', 'APPL', 50, 50);
+VALUES (RANDOM_UUID(), '1', 'TRY', 100, 100),
+       (RANDOM_UUID(), '1', 'APPL', 10, 10);
 
 INSERT INTO customer (customer_id,username,password,role)
 VALUES (RANDOM_UUID(), 'onderguzeloglu', '$2a$10$eMaI1ln5gMoPnrHtDE1sEOHDlIVIQIMP8wSqa13qmnlRt6B9rqUYm','CUSTOMER'),
