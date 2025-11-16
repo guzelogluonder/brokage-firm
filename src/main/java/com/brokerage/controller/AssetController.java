@@ -17,8 +17,8 @@ public class AssetController {
 
     private final AssetService assetService;
 
-    public static final String ASSET_PATH = "/assets";
-    public static final String ASSET_PATH_ID = "/assets/{customerId}";
+    public static final String ASSET_PATH = "/api/assets";
+    public static final String ASSET_PATH_ID = "/api/assets/{customerId}";
 
     @GetMapping(ASSET_PATH_ID)
     public List<Asset> getAsset(@PathVariable("customerId") UUID customerId){
