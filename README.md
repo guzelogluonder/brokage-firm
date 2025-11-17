@@ -108,6 +108,16 @@ GET /api/assets?customerId=1
 Authorization: Basic YWRtaW46YWRtaW4xMjM=
 ```
 
+
+#### Match Order
+```http
+POST /api/match-order
+Authorization: Basic YWRtaW46YWRtaW4xMjM=
+{
+    "orderId":"b7f7376a-e7be-4a24-9342-2c866a55f912"
+}
+```
+
 ## Business Logic
 
 ### Order Creation
@@ -127,6 +137,12 @@ Authorization: Basic YWRtaW46YWRtaW4xMjM=
 - Only PENDING orders can be canceled
 - Locked amounts are released back to usableSize
 - Order status is updated to CANCELED
+
+### Order Matching
+- Locked amounts are released back to usableSize
+- Asset quantity is updated
+- TRY balance is updated
+- Order status is updated to MATCHED
 
 
 ## Testing
