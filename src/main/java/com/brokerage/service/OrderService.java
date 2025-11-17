@@ -27,8 +27,6 @@ public class OrderService {
 
     private final OrderRepository orderRepository;
     private final OrderMapper orderMapper;
-    private final AssetService assetService;
-    private final AssetMapper assetMapper;
     private final AssetRepository assetRepository;
 
     @Transactional
@@ -77,7 +75,7 @@ public class OrderService {
             releaseSellOrderAssets(order);
         }
 
-        order.setStatus(Status.CANCELED);
+        order.setStatus(status);
         orderRepository.save(order);
         orderMapper.orderToDto(order);
     }

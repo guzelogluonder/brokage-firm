@@ -22,7 +22,7 @@ CREATE TABLE orders
 );
 CREATE TABLE customer
 (
-    customer_id VARCHAR(36),
+    customer_id VARCHAR(36) PRIMARY KEY,
     username   VARCHAR(255),
     password    VARCHAR(255),
     role        VARCHAR(255)

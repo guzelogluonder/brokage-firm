@@ -3,14 +3,12 @@ package com.brokerage.controller;
 import com.brokerage.model.Asset;
 import com.brokerage.service.AssetService;
 import lombok.AllArgsConstructor;
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.UUID;
 
-@Slf4j
 @AllArgsConstructor
 @RestController
 public class AssetController {
@@ -26,7 +24,7 @@ public class AssetController {
     }
 
     @GetMapping(ASSET_PATH)
-    public Iterable<Asset> getAllAsset(){
+    public Iterable<Asset> getAllAssets(){
         return ResponseEntity.ok().body(this.assetService.getAllAsset()).getBody();
     }
 

@@ -47,7 +47,6 @@ public class SecurityConfig {
 
     @Bean
     public UserDetailsService userDetailsService() {
-        // Direkt lambda ile UserDetailsService implement et
         return username -> customerRepository.findByUsername(username)
                 .map(customer -> User.builder()
                         .username(customer.getUsername())

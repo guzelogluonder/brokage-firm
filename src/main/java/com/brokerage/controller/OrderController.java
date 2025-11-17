@@ -15,6 +15,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
+import static org.springframework.http.ResponseEntity.ok;
+
 @Slf4j
 @AllArgsConstructor
 @RestController
@@ -36,12 +38,12 @@ public class OrderController {
     public List<Order> listOrders (@RequestParam Long customerId,
                                    @RequestParam(required = false) LocalDateTime startDate,
                                    @RequestParam(required = false) LocalDateTime endDate){
-        return ResponseEntity.ok().body(orderService.listOrders(customerId,startDate,endDate)).getBody();
+        return ok().body(orderService.listOrders(customerId,startDate,endDate)).getBody();
     }
 
     @DeleteMapping(DELETE_ORDER_PATH)
-    public Boolean deleteOrder(@PathVariable("orderId") UUID orderId){
+    public ResponseEntity<OrderDto> deleteOrder(@PathVariable("orderId") UUID orderId){
         orderService.deleteOrder(Status.CANCELED,orderId);
-        return true;
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 }

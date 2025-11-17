@@ -17,10 +17,10 @@ import java.util.UUID;
 public class Customer {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.UUID)
-    @UuidGenerator
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(length = 36, columnDefinition = "varchar(36)", updatable = false, nullable = false)
-    private UUID customerId;
+    private Long customerId;
+
 
     @Column(name = "username")
     private String username;
