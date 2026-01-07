@@ -1,5 +1,6 @@
 package com.brokerage.controller;
 
+import com.brokerage.component.KafkaProducer;
 import com.brokerage.dto.OrderDto;
 import com.brokerage.enums.Status;
 import com.brokerage.model.Order;
@@ -23,13 +24,13 @@ import static org.springframework.http.ResponseEntity.ok;
 public class OrderController {
 
     private final OrderService orderService;
-
+    private final KafkaProducer kafkaProducer;
     public static final String API_ORDERS = "/api/orders";
     public static final String DELETE_ORDER_PATH = "/api/orders/{orderId}";
 
     @PostMapping(API_ORDERS)
     public ResponseEntity<OrderDto> createOrder(@RequestBody OrderDto orderDto){
-
+        kafkaProducer.sendMessage(orderDto.toString());
         return new ResponseEntity<>(orderService.createNewOrder(orderDto), HttpStatus.CREATED);
 
     }
